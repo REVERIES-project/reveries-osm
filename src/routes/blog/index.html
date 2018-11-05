@@ -1,0 +1,54 @@
+<svelte:head>
+	<title>Mission</title>
+</svelte:head>
+
+<h1>Accessible missions</h1>
+{#each posts as post}
+<Mission missionTitle={post.title}></Mission>
+
+<!-- we're using the non-standard `rel=prefetch` attribute to
+				tell Sapper to load the data for the page as soon as
+				the user hovers over the link or taps it, instead of
+				waiting for the 'click' event -->
+
+<div on:click=gotoPost({post})> 
+	<a rel='prefetch' href='blog/{post.slug}'>{post.title}</a>
+</div>
+{/each}
+
+<style>
+	div {
+	text-align: center;
+    margin: 27px;
+    padding: 21px;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75)	}
+</style>
+
+<script>
+	import Mission from './_mission.html';
+	export default {
+		preload({
+			params,
+			query
+		}) {
+			return this.fetch(`blog.json`).then(r => r.json()).then(posts => {
+				return {
+					posts
+				};
+			});
+		},
+	methods:{
+		gotoPost(post){
+			//window.location.pathname=post.slug
+			this.store.set({mission:'new value after click'})
+		}
+	},
+	components:{
+		Mission
+	}
+	};
+</script>

@@ -1,0 +1,53 @@
+<svelte:head>
+	<title> OSM App </title>
+</svelte:head>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<h1>Mission : se rendre au cercle rouge</h1>
+<div on:click=showCircle() id="OSM">
+
+</div>
+<style>
+	#OSM {
+		width: 100%;
+		height: 90vw;
+		;
+	}
+</style>
+
+<script>
+	export default {
+		data() {
+			return {
+				extents: {},
+				mapObject: {}
+			}
+		},
+		oncreate() {
+			import('leaflet/dist/leaflet.js').then((L) => {
+				var mymap = L.map('OSM').setView([48.856614, 2.3522219], 12);
+				L.tileLayer('//proxy-ign.openstreetmap.fr/94GjiyqD/bdortho/{z}/{x}/{y}.jpg', {
+					attribution: 'donn&eacute;es &copy; <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+					minZoom: 1,
+					maxZoom: 20
+				}).addTo(mymap);
+				this.set({map:mymap,L:L})
+
+
+			})
+
+		},
+		methods: {
+			showCircle(){
+				let L = this.get().L
+				let mymap=this.get().map
+				var circle = L.circle([48.856614, 2.3522219], {
+					color: 'red',
+					fillColor: '#f03',
+					fillOpacity: 0.5,
+					radius: 500
+				}).addTo(mymap);
+			}
+		}
+	}
+</script>
