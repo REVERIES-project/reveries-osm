@@ -1,19 +1,24 @@
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>REVERIES</title>
 </svelte:head>
-<h1>Great success!</h1>
+<h1>REVERIES!</h1>
 
-<figure>
-	<img alt='Borat' src='great-success.png'>
-	<figcaption>HIGH FIVE!</figcaption>
-</figure>
-
+<div class=badges>
+		{#each $badges as badge}
+			<Badge caption="{badge.caption}" source='{badge.image}'/>
+		{/each}
+</div>
 <p><strong>Try editing this file (routes/index.html) to test hot module {$mission}.</strong></p>
 
 <style>
 	h1, figure, p {
 		text-align: center;
 		margin: 0 auto;
+	}
+
+	.badges{
+		display:inline-flex;
+		flex-direction: row;
 	}
 
 	h1 {
@@ -23,15 +28,7 @@
 		margin: 0 0 0.5em 0;
 	}
 
-	figure {
-		margin: 0 0 1em 0;
-	}
 
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
 
 	p {
 		margin: 1em auto;
@@ -44,11 +41,12 @@
 	}
 </style>
 <script>
-  import io from 'socket.io-client'
-  var socket = io.connect('http://localhost:3000')
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
+  import Badge from './_badges.html'
+  export default {
+		components: {
+			Badge
+		}
+	};
+
 	
 </script>

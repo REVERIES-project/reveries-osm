@@ -16,7 +16,7 @@ app // You can also use Express
 		sapper.middleware({
 			store: request => {
 			  return new Store({
-				mission: "This comes from store"
+				badges: [{image:'badge1.png',caption:'Premier arbre identifié!'},{image:'badge2.png',caption:'Coquetier identifié!'}]
 			  });
 			}
 		})
