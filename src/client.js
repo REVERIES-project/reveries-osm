@@ -58,7 +58,7 @@ sapper.start({
 									lat: 2.3522219,
 								},
 								description: {
-									title: 'Trouver 10 jeunes pousses',
+									title: 'Identifier 10 jeunes pousses',
 									html: '<h1>Trouver 10 jeunes pousse</h1>'
 								},
 									status: 'current'

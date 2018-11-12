@@ -7,7 +7,7 @@
 <div id="OSM">
 
 </div>
-<button>Utiliser Folia</button>
+<button on:click=showSwal()>Utiliser Folia</button>
 <button>Utiliser clef</button>
 <button>Nommer arbre</button>
 <style>
@@ -19,6 +19,7 @@
 </style>
 
 <script>
+	import swal from 'sweetalert'
 	export default {
 		computed: {
 			currentMission: ({
@@ -54,11 +55,24 @@
 					map: mymap,
 					L: L
 				})
+				var marker = L.marker([currentMission.coordinate.lng, currentMission.coordinate.lat]).addTo(mymap);
+				marker.bindPopup("<b>Votre position!</b><br>Cliquer pour fermer").openPopup();
 				this.showCircle(currentMission.coordinate)
 			})
 		},
 		methods: {
+			showSwal() {
+				swal({
+					title : 'Nom scientifique',
+					text: 'Donner le nom scientifique du specimen e.g. "Adavra kadevra".',
+					content: "input",
+					button: {
+						text: "Fait!",
+						closeModal: false,
+					},
+				});
 
+			},
 			showCircle(coordinate) {
 
 				let L = this.get().L

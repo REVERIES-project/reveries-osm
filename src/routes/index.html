@@ -1,17 +1,23 @@
 <svelte:head>
 	<title>REVERIES</title>
 </svelte:head>
-<h1>REVERIES!</h1>
-
+<h1>Votre profil : </h1>
+<h2>Badges :</h2>
 <div class=badges>
 		{#each $badges as badge}
 			<Badge caption="{badge.caption}" source='{badge.image}'/>
 		{/each}
 </div>
+<h2>Missions completes</h2>
+{#each $missions as mission}
+	{#if mission.status=="done"}
+	<Mission mission={mission}> </Mission>
+	{/if}
+{/each}
 <p><strong>Try editing this file (routes/index.html) to test hot module {$mission}.</strong></p>
 
 <style>
-	h1, figure, p {
+	h1, p {
 		text-align: center;
 		margin: 0 auto;
 	}
@@ -42,9 +48,10 @@
 </style>
 <script>
   import Badge from './_badges.html'
+  import Mission from './mission/_mission.html'
   export default {
 		components: {
-			Badge
+			Badge,Mission
 		}
 	};
 
