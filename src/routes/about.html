@@ -3,50 +3,77 @@
 </svelte:head>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<h1>Mission : se rendre au cercle rouge</h1>
-<div on:click=showCircle() id="OSM">
+<h1>Mission : {currentMission.description.title}</h1>
+<div id="OSM">
 
 </div>
+<button>Utiliser Folia</button>
+<button>Utiliser clef</button>
+<button>Nommer arbre</button>
 <style>
 	#OSM {
 		width: 100%;
-		height: 90vw;
+		height: 70vw;
 		;
 	}
 </style>
 
 <script>
 	export default {
-		data() {
-			return {
-				extents: {},
-				mapObject: {}
+		computed: {
+			currentMission: ({
+				$missions
+			}) => {
+				for (const mission of $missions) {
+					if (mission.status == "current") {
+						return mission
+					}
+				}
 			}
 		},
+
 		oncreate() {
+
+		},
+		onupdate({
+			changed,
+			current,
+			previous
+		}) {
+			// this fires after oncreate, and after every state change
+			// once the DOM is synchronised with the data
+			let currentMission = this.get().currentMission
 			import('leaflet/dist/leaflet.js').then((L) => {
-				var mymap = L.map('OSM').setView([48.856614, 2.3522219], 12);
+				var mymap = L.map('OSM').setView([currentMission.coordinate.lng, currentMission.coordinate.lat], 12);
 				L.tileLayer('//proxy-ign.openstreetmap.fr/94GjiyqD/bdortho/{z}/{x}/{y}.jpg', {
 					attribution: 'donn&eacute;es &copy; <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
 					minZoom: 1,
 					maxZoom: 20
 				}).addTo(mymap);
-				this.set({map:mymap,L:L})
-
-
+				this.set({
+					map: mymap,
+					L: L
+				})
+				this.showCircle(currentMission.coordinate)
 			})
-
 		},
 		methods: {
-			showCircle(){
+
+			showCircle(coordinate) {
+
 				let L = this.get().L
-				let mymap=this.get().map
-				var circle = L.circle([48.856614, 2.3522219], {
-					color: 'red',
-					fillColor: '#f03',
-					fillOpacity: 0.5,
-					radius: 500
-				}).addTo(mymap);
+				let mymap = this.get().map
+				for (let index = 0; index < 10; index++) {
+					let lngDev = Math.random() / 10
+					let latDev = Math.random() / 10
+					var circle = L.circle([coordinate.lng + lngDev, coordinate.lat + latDev], {
+						color: 'red',
+						fillColor: '#f03',
+						fillOpacity: 0.5,
+						radius: 500
+					}).addTo(mymap);
+
+				}
 			}
 		}
 	}

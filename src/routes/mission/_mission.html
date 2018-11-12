@@ -1,0 +1,60 @@
+<div class="container {mission.status}">
+    <div class=mission>
+        {mission.description.title}
+    </div>
+    <div class="inside">
+        <Button>Information</Button>
+        {#if mission.status=="active"}
+        <button on:click=activateMission(mission.id)>Activate</button>
+        {/if}
+    </div>
+</div>
+<Modal ref:modal></Modal>
+<style>
+    div.container {
+        display: flex;
+        flex-direction: column;
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 5px;
+        margin: 27px;
+
+    }
+    div.done{
+        background-color: antiquewhite;
+    }
+    div.active{
+        background-color:aqua;
+    }
+    div.current{
+        background-color: green;
+    }
+    div.inside{
+        padding:5px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    div.mission {
+        text-align: center;
+        padding: 21px;
+    }
+</style>
+<script>
+    import Modal from '../_common/_modal.html'
+    import Button from '../_common/button.html'
+    import * as sapper from '../../../__sapper__/client.js';
+
+    export default {
+        methods:{
+            activateMission(id){
+                this.store.activateMission(id)
+                sapper.goto('/mission')
+            }
+        },
+        components: {
+            Modal,
+            Button
+        },
+    };
+</script>
