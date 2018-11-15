@@ -1,11 +1,13 @@
 <nav>
 	<ul>
 		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>Profile</a></li>
-		<li><a class='{segment === "about" ? "selected" : ""}' href='map'>Mission en cours</a></li>
+		<li><a class='{segment === "map" ? "selected" : ""}' href='map'>Mission en cours</a></li>
 
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch class='{segment === "blog" ? "selected" : ""}' href='mission'>Liste des missions</a></li>
+		<li><a rel=prefetch class='{segment === "mission" ? "selected" : ""}' href='mission'>Liste des missions</a></li>
+		<li><a class='{segment === "botadex" ? "selected" : ""}' href='botadex'>Botadex</a></li>
+
 	</ul>
 </nav>
 

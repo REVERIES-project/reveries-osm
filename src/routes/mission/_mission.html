@@ -3,9 +3,9 @@
         {mission.description.title}
     </div>
     <div class="inside">
-        <Button>Information</Button>
+        <button  class="btn btn-primary">Information</button>
         {#if mission.status=="active"}
-        <button on:click=activateMission(mission.id)>Activate</button>
+        <button  class="btn btn-primary" on:click=activateMission(mission.id)>Activate</button>
         {/if}
     </div>
 </div>

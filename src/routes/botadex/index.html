@@ -1,0 +1,25 @@
+<svelte:head>
+    <title>Botadex</title>
+</svelte:head>
+
+<h1>Botadex</h1>
+{#each botadexItems as item}
+<Botadex img={item.img} found={item.found} texte={item.txt} commonName={item.specie} specie='{item.commonName}'></Botadex>
+{/each}
+<style>
+</style>
+
+<script>
+    import Botadex from './_botadex.html'
+    export default {
+        preload({ params, query }) {
+			return this.fetch('botadex.json').then(r => r.json()).then(botadexItems => {
+				return { botadexItems };
+			});
+		},
+
+        components:{
+            Botadex
+        }
+    };
+</script>
