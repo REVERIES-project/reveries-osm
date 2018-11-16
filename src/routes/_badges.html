@@ -1,25 +1,11 @@
-<figure>
-	<img alt={caption} src={source}>
-	<figcaption>{caption}</figcaption>
-</figure>
+<div class:toFind=!found class="card" style="padding:5px;margin:25px;">
+    <img class="card-img-top" src="{source}" alt="Card image cap">
+
+    <div class="card-body">
+        <h5 class="card-title">{caption}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{caption}</h6>
+        <p class="card-text">{caption}</p>
+    </div>
+</div>
 <style>
-figure {
-    width:200px;
-    box-shadow: 8px 8px 36px 4px #000000;
-    margin: 0 0 1em 0;
-    margin-left:10px;
-    margin-right:10px;
-}
-figcaption{
-    text-align: center;
-    font-size: larger;
-    font-weight: bold;
-}
-img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-
 </style>
