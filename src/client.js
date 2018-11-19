@@ -11,7 +11,7 @@ sapper.start({
 							caption: 'Premier arbre identifié!'
 						}, {
 							image: 'badge2.png',
-							caption: 'Coquetier identifié!'
+							caption: 'Platane identifié!'
 						}],
 						missions: [{
 								id: 0,

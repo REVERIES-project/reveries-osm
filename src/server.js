@@ -19,7 +19,7 @@ let badges=[{
 	caption: 'Premier arbre identifié!'
 }, {
 	image: 'badge2.png',
-	caption: 'Coquetier identifié!'
+	caption: 'Platane identifié!'
 }]
 let missions = [{
 	id:1,
